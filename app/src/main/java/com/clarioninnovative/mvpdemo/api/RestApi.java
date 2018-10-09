@@ -75,12 +75,4 @@ public class RestApi {
     public ApiService getService() {
         return buildAdapter(BASE_URL, buildOkHttpClient(), ApiService.class);
     }
-
-
-    public interface ApiService {
-
-        //https://api.github.com/orgs/square/repos
-        @GET("orgs/{orgName}/repos?page=1&per_page=5")
-        Call<List<Repos>> getRepos(@Path("orgName") String orgName);
-    }
 }

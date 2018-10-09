@@ -12,12 +12,18 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
-public class RetrofitGitServiceProvider implements GitProvider {
+public class RetrofitGitServiceProvider extends BaseRetrofitProvider<ApiService> implements GitProvider {
+
+    public RetrofitGitServiceProvider(Retrofit retrofit) {
+        super(retrofit, ApiService.class);
+    }
 
     @Override
     public void getRepos(String owner, final CallBack<List<Repos>> callBack) {
-        RestApi.getInstance().getService().getRepos(owner).enqueue(new Callback<List<Repos>>() {
+        /*RestApi.getInstance().getService()*/
+        getService().getRepos(owner).enqueue(new Callback<List<Repos>>() {
             @Override
             public void onResponse(@NonNull Call<List<Repos>> call, @NonNull Response<List<Repos>> response) {
                 if (response.isSuccessful()) {
